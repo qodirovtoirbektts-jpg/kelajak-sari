@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AutoParts Uz | Avto Zapchastlar</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f3f5f7;
+    color: #222;
+}
+
+/* HEADER */
+
+header {
+    background: #111827;
+    color: white;
+    padding: 18px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #ff3b30;
+}
+
+.search {
+    flex: 1;
+    max-width: 600px;
+}
+
+.search input {
+    width: 100%;
+    padding: 13px 18px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+
+.cart {
+    background: #ff3b30;
+    padding: 12px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+/* HERO */
+
+.hero {
+    background:
+    linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+    url("https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1600&q=80");
+
+    background-size: cover;
+    background-position: center;
+
+    color: white;
+    padding: 90px 5%;
+}
+
+.hero h1 {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 19px;
+    margin-bottom: 25px;
+}
+
+.hero button {
+    background: #ff3b30;
+    color: white;
+    border: none;
+    padding: 15px 28px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* CATEGORY */
+
+.categories {
+    padding: 35px 5%;
+}
+
+.categories h2 {
+    margin-bottom: 20px;
+}
+
+.category-list {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.category {
+    background: white;
+    padding: 13px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+
+.category:hover {
+    background: #ff3b30;
+    color: white;
+}
+
+/* PRODUCTS */
+
+.products {
+    padding: 10px 5% 50px;
+}
+
+.products h2 {
+    margin-bottom: 25px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 22px;
+}
+
+.product {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    transition: .3s;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+}
+
+.product img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 16px;
+}
+
+.product-info h3 {
+    margin-bottom: 8px;
+}
+
+.product-info p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e53935;
+    margin-bottom: 13px;
+}
+
+.product button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #111827;
+    color: white;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.product button:hover {
+    background: #ff3b30;
+}
+
+/* CONTACT */
+
+.contact {
+    background: #111827;
+    color: white;
+    padding: 45px 5%;
+}
+
+.contact h2 {
+    margin-bottom: 20px;
+}
+
+.contact p {
+    margin: 10px 0;
+}
+
+/* FOOTER */
+
+footer {
+    background: #080b11;
+    color: #aaa;
+    text-align: center;
+    padding: 20px;
+}
+
+/* CART */
+
+.cart-box {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    width: 360px;
+    height: 100%;
+    background: white;
+    z-index: 200;
+    box-shadow: -5px 0 20px rgba(0,0,0,.2);
+    padding: 25px;
+    transition: .4s;
+}
+
+.cart-box.active {
+    right: 0;
+}
+
+.cart-box h2 {
+    margin-bottom: 20px;
+}
+
+.close {
+    float: right;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.cart-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.total {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.order {
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px;
+    background: #25d366;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:700px) {
+
+    header {
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .search {
+        order: 3;
+        width: 100%;
+        max-width: none;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .cart-box {
+        width: 100%;
+        right: -100%;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        AUTO<span>PARTS</span>
+    </div>
+
+    <div class="search">
+        <input
+        type="text"
+        id="searchInput"
+        placeholder="Zapchast qidirish..."
+        onkeyup="searchProducts()">
+    </div>
+
+    <div class="cart" onclick="openCart()">
+        🛒 Savat (<span id="cartCount">0</span>)
+    </div>
+
+</header>
+
+
+<section class="hero">
+
+    <h1>Avtomobil zapchastlari</h1>
+
+    <p>
+        Sifatli ehtiyot qismlar.
+        Qulay narxlar. Tez yetkazib berish.
+    </p>
+
+    <button onclick="scrollToProducts()">
+        Mahsulotlarni ko‘rish
+    </button>
+
+</section>
+
+
+<section class="categories">
+
+<h2>Kategoriyalar</h2>
+
+<div class="category-list">
+
+<div class="category" onclick="filterProducts('Dvigatel')">
+⚙️ Dvigatel
+</div>
+
+<div class="category" onclick="filterProducts('Tormoz')">
+🛑 Tormoz tizimi
+</div>
+
+<div class="category" onclick="filterProducts('Elektr')">
+🔋 Elektr
+</div>
+
+<div class="category" onclick="filterProducts('Filtr')">
+🛢 Filtrlar
+</div>
+
+<div class="category" onclick="filterProducts('Kuzov')">
+🚗 Kuzov
+</div>
+
+<div class="category" onclick="filterProducts('Moy')">
+🛠 Moy va suyuqliklar
+</div>
+
+<div class="category" onclick="showAll()">
+Barchasi
+</div>
+
+</div>
+
+</section>
+
+
+<section class="products" id="products">
+
+<h2>Ommabop mahsulotlar</h2>
+
+<div class="product-grid" id="productGrid">
+
+
+<div class="product" data-category="Filtr">
+
+<img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=600&q=80">
+
+<div class="product-info">
+
+<h3>Moy filtri</h3>
+
+<p>Yuqori sifatli avtomobil moy filtri</p>
+
+<div class="price">85 000 so‘m</div>
+
+<button onclick="addToCart('Moy filtri',85000)">
+🛒 Savatga qo‘shish
+</button>
+
+</div>
+</div>
+
+
+<div class="product" data-category="Tormoz">
+
+<img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=600&q=80">
+
+<div class="product-info">
+
+<h3>Tormoz kolodkasi</h3>
+
+<p>Old tormoz kolodkasi</p>
+
+<div class="price">320 000 so‘m</div>
+
+<button onclick="addToCart('Tormoz kolodkasi',320000)">
+🛒 Savatga qo‘shish
+</button>
+
+</div>
+</div>
+
+
+<div class="product" data-category="Dvigatel">
+
+<img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=600&q=80">
+
+<div class="product-info">
+
+<h3>Generator</h3>
+
+<p>Avtomobil generatori</p>
+
+<div class="price">1 250 000 so‘m</div>
+
+<button onclick="addToCart('Generator',1250000)">
+🛒 Savatga qo‘shish
+</button>
+
+</div>
+</div>
+
+
+<div class="product" data-category="Elektr">
+
+<img src="https://images.unsplash.com/photo-1597766353939-4c6d6e6b4a8c?auto=format&fit=crop&w=600&q=80">
+
+<div class="product-info">
+
+<h3>Avtomobil akkumulyatori</h3>
+
+<p>12V avtomobil akkumulyatori</p>
+
+<div class="price">850 000 so‘m</div>
+
+<button onclick="addToCart('Akkumulyator',850000)">
+🛒 Savatga qo‘shish
+</button>
+
+</div>
+</div>
+
+
+<div class="product" data-category="Moy">
+
+<img src="https://images.unsplash.com/photo-1635784063381-6b9e6f7a9b8b?auto=format&fit=crop&w=600&q=80">
+
+<div class="product-info">
+
+<h3>Motor moyi</h3>
+
+<p>5W-40 sintetik motor moyi</p>
+
+<div class="price">450 000 so‘m</div>
+
+<button onclick="addToCart('Motor moyi',450000)">
+🛒 Savatga qo‘shish
+</button>
+
+</div>
+</div>
+
+
+<div class="product" data-category="Kuzov">
+
+<img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=600&q=80">
+
+<div class="product-info">
+
+<h3>Avtomobil farasi</h3>
+
+<p>LED old fara</p>
+
+<div class="price">650 000 so‘m</div>
+
+<button onclick="addToCart('Avtomobil farasi',650000)">
+🛒 Savatga qo‘shish
+</button>
+
+</div>
+</div>
+
+
+</div>
+
+</section>
+
+
+<section class="contact">
+
+<h2>Biz bilan bog‘laning</h2>
+
+<p>📞 Telefon: +998 90 123 45 67</p>
+
+<p>📍 Manzil: Namangan viloyati</p>
+
+<p>📲 Telegram: @avtoparts</p>
+
+<p>📸 Instagram: @avtoparts_uz</p>
+
+</section>
+
+
+<footer>
+
+© 2026 AUTOPARTS UZ. Barcha huquqlar himoyalangan.
+
+</footer>
+
+
+<!-- SAVAT -->
+
+<div class="cart-box" id="cartBox">
+
+<span class="close" onclick="closeCart()">×</span>
+
+<h2>🛒 Savat</h2>
+
+<div id="cartItems"></div>
+
+<div class="total">
+
+Jami:
+<span id="totalPrice">0</span> so‘m
+
+</div>
+
+<button class="order" onclick="orderWhatsApp()">
+📲 WhatsApp orqali buyurtma
+</button>
+
+</div>
+
+
+<script>
+
+let cart = [];
+
+
+/* SAVATGA QO‘SHISH */
+
+function addToCart(name, price) {
+
+    cart.push({
+        name: name,
+        price: price
+    });
+
+    updateCart();
+
+    alert(name + " savatga qo‘shildi!");
+
+}
+
+
+/* SAVATNI YANGILASH */
+
+function updateCart() {
+
+    document.getElementById("cartCount").innerText = cart.length;
+
+    let html = "";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+
+        total += item.price;
+
+        html += `
+        <div class="cart-item">
+
+        <b>${item.name}</b>
+
+        <br>
+
+        ${item.price.toLocaleString()} so‘m
+
+        <br>
+
+        <button onclick="removeItem(${index})">
+        ❌ O‘chirish
+        </button>
+
+        </div>
+        `;
+
+    });
+
+    document.getElementById("cartItems").innerHTML = html;
+
+    document.getElementById("totalPrice").innerText =
+        total.toLocaleString();
+
+}
+
+
+/* O‘CHIRISH */
+
+function removeItem(index) {
+
+    cart.splice(index,1);
+
+    updateCart();
+
+}
+
+
+/* SAVATNI OCHISH */
+
+function openCart() {
+
+    document.getElementById("cartBox")
+    .classList.add("active");
+
+}
+
+
+/* SAVATNI YOPISH */
+
+function closeCart() {
+
+    document.getElementById("cartBox")
+    .classList.remove("active");
+
+}
+
+
+/* QIDIRISH */
+
+function searchProducts() {
+
+    let text =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    let products =
+        document.querySelectorAll(".product");
+
+    products.forEach(product => {
+
+        let name =
+            product.querySelector("h3")
+            .innerText
+            .toLowerCase();
+
+        if(name.includes(text)) {
+
+            product.style.display = "block";
+
+        } else {
+
+            product.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* KATEGORIYA */
+
+function filterProducts(category) {
+
+    let products =
+        document.querySelectorAll(".product");
+
+    products.forEach(product => {
+
+        if(product.dataset.category === category) {
+
+            product.style.display = "block";
+
+        } else {
+
+            product.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* BARCHASI */
+
+function showAll() {
+
+    let products =
+        document.querySelectorAll(".product");
+
+    products.forEach(product => {
+
+        product.style.display = "block";
+
+    });
+
+}
+
+
+/* MAHSULOTLARGA O‘TISH */
+
+function scrollToProducts() {
+
+    document.getElementById("products")
+    .scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+/* WHATSAPP */
+
+function orderWhatsApp() {
+
+    if(cart.length === 0) {
+
+        alert("Savat bo‘sh!");
+
+        return;
+
+    }
+
+    let message =
+        "Assalomu alaykum! Men quyidagi zapchastlarni buyurtma qilmoqchiman:%0A%0A";
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        message +=
+        "• " + item.name +
+        " - " +
+        item.price.toLocaleString() +
+        " so‘m%0A";
+
+        total += item.price;
+
+    });
+
+    message +=
+        "%0AJami: " +
+        total.toLocaleString() +
+        " so‘m";
+
+    /* BU YERGA O‘ZINGIZNING WHATSAPP RAQAMINGIZNI YOZING */
+
+    let phone = "998901234567";
+
+    window.open(
+        "https://wa.me/" +
+        phone +
+        "?text=" +
+        message,
+        "_blank"
+    );
+
+}
+
+</script>
+
+</body>
+</html>
